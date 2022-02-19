@@ -1,0 +1,54 @@
+<div class="container d-block justify-content-center">
+  <div class="row">
+    <div class="col mt-5 d-flex justify-content-center">
+      <!-- <input type="text" class="form-control w-50" name="name" #search id="card-name" placeholder="Buscar por nombre">
+      <input type="button" name="buscar" id="buscar" (click)="searchMazoByName(search.value)" value="Buscar"
+        class="btn btn-primary"> -->
+      <input type="button" name="crear" id="crear" (click)="open(content)" value="Crear Mazo" class="btn btn-primary">
+    </div>
+  </div>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Crear Mazo</h4>
+      <button type="button" class="btn close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">X</span>
+      </button>
+    </div>
+    <div class="modal-body flex">
+      <div class="justify-content-center m-2 w-50">
+        <input type="text" class="form-control" name="nombre" #nombre id="nombre" placeholder="Nombre del mazo">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')"
+        (click)="createMazo(nombre.value)">Guardar</button>
+    </div>
+  </ng-template>
+  <br>
+  <div class="row">
+    <div class="col d-flex justify-content-center" *ngIf="response">
+      <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+      </pagination-controls>
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Mazos por pagina</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem (click)="pageSize = 6">6</button>
+          <button ngbDropdownItem (click)="pageSize = 9">9</button>
+          <button ngbDropdownItem (click)="pageSize = 12">12</button>
+          <button ngbDropdownItem (click)="pageSize = 16">16</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col container flex" *ngIf="response">
+      <div class="m-2 card float-start custom-card" (click)="showMazo(mazo.id)"
+        *ngFor="let mazo of response | paginate: {itemsPerPage: pageSize, currentPage: page};">
+        <div class="card-body">
+          {{mazo.nombre}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

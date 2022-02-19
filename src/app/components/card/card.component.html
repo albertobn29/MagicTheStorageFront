@@ -1,0 +1,80 @@
+<div class="m-2">
+  <div class="card" id="{{id}}" #carta>
+    <div class="card-body">
+      <div class="alert alert-info" *ngIf="mensaje!==''">
+        {{mensaje}}
+      </div>
+      <img src="{{imgUrl}}" class="w-50" alt="">
+      <p>{{name}}</p>
+      <p>{{set}} -> {{setName}}</p>
+      <div>
+        <p *ngIf="origen=='coleccion'">Tienes {{cantidad}} cartas</p>
+      </div>
+
+      <ng-template #content let-c="close" let-d="dismiss" (keypress.enter)="storeCard(cantidad.value, id, name)">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Guardar Carta</h4>
+          <button type="button" class="btn close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">X</span>
+          </button>
+        </div>
+        <div class="modal-body flex">
+          <div class="w-25 float-start">
+            <img src="{{imgUrl}}" class="w-75" alt="">
+          </div>
+          <div class="float-start m-2 w-50">
+            <input type="text" class="form-control" name="cantidad" #cantidad id="cantidad"
+              placeholder="Cantidad de cartas">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Save click')"
+            (click)="storeCard(cantidad.value, id, name)">Guardar</button>
+        </div>
+      </ng-template>
+
+      <ng-template #mazoModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Añadir a Mazo</h4>
+          <button type="button" class="btn close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">X</span>
+          </button>
+        </div>
+        <div class="modal-body flex">
+          <div class="w-25 float-start">
+            <img src="{{imgUrl}}" class="w-75" alt="">
+          </div>
+          <div class="float-start m-2 w-50">
+            <!-- <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Seleccione un mazo</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem #mazo *ngFor="let mazo of mazos"
+                  (click)="addCardToMazo(id,mazo.id)" (click)="c('Save click')">{{mazo.nombre}}</button>
+              </div>
+            </div> -->
+            <div class="card mb-1" #mazo *ngFor="let mazo of mazos" (click)="addCardToMazo(id,mazo.id)"
+              (click)="c('Save click')">
+              <div class="card-body">
+                {{mazo.nombre}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <div *ngIf="origen!=='mazo'; else mazo">
+        <button class="btn btn-lg btn-outline-primary" *ngIf="origen!=='coleccion'" (click)="open(content)">Añadir a la
+          colección</button>
+        <button class="btn btn-lg btn-outline-primary" *ngIf="cantidad>0" (click)="open(mazoModal)">Añadir a
+          Mazo</button>
+      </div>
+
+      <ng-template #mazo>
+        <button class="btn btn-lg btn-outline-primary" (click)="borrarFromMazo(id,mazo_id)">Eliminar del mazo</button>
+      </ng-template>
+
+      <input type="button" class="btn btn-info" value="Ver en detalle" (click)="showCard(carta.id)">
+
+    </div>
+  </div>
+</div>

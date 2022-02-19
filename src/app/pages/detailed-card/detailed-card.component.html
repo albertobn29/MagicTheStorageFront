@@ -1,0 +1,17 @@
+<div class="contaner-fluid d-flex m-5">
+  <div class="m-3">
+    <img src="{{cardInfo.card.foreignNames[1].imageUrl}}" alt="">
+  </div>
+  <div class="m-3">
+    <h3><strong> Nombre: </strong>{{cardInfo.card.foreignNames[1].name}}</h3>
+    <div>
+      <p><strong>Descripción:</strong></p>
+      <div>
+        <p *ngFor="let desc of descripcionSplit">{{desc}}</p><br>
+      </div>
+    </div>
+    <p><strong> Mana Total: </strong>{{cardInfo.card.cmc}}</p>
+    <p><strong> Expansion: </strong>{{cardInfo.card.set}} -> {{cardInfo.card.setName}}</p>
+    <p><strong> Color: </strong>{{colores}}</p>
+  </div>
+</div>

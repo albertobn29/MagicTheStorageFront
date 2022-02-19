@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand ms-3" routerLink="/inicio" routerLinkActive="active">Magic: The Storage</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse d-flex justify-content-end me-5" id="navbarNav">
+    <ul class="navbar-nav">
+      <div *ngIf="login.isLogin(); then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='/buscar' routerLinkActive="active">Buscar Carta</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='/coleccion' routerLinkActive="active">Mi Colección</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='/mazos' routerLinkActive="active">Mis Mazos</a>
+        </li>
+        <li class="ms-4">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn" id="dropdownBasic1" ngbDropdownToggle>{{user_username}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem (click)="login.logOut()">Desconectarse</button>
+              <!-- <button ngbDropdownItem>Another Action</button>
+              <button ngbDropdownItem>Something else is here</button> -->
+            </div>
+          </div>
+        </li>
+      </ng-template>
+      <ng-template #elseBlock>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='/login' routerLinkActive="active">Login</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='/registro' routerLinkActive="active">Registro</a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,30 @@
+<div class="container d-block justify-content-center">
+  <div class="row">
+    <h2>Mazo: {{nombreMazo}}</h2>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col d-flex justify-content-center" *ngIf="response">
+      <input type="button" class=" btn btn-sm btn-outline-dark" value="Borrar Mazo" (click)="deleteMazo(mazoId)">
+      <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+      </pagination-controls>
+      <div ngbDropdown class="d-inline-block m-2">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Cartas por pagina</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem (click)="pageSize = 3">3</button>
+          <button ngbDropdownItem (click)="pageSize = 6">6</button>
+          <button ngbDropdownItem (click)="pageSize = 9">9</button>
+          <button ngbDropdownItem (click)="pageSize = 12">12</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col container flex" *ngIf="response">
+      <app-card *ngFor="let carta of response | paginate: {itemsPerPage: pageSize, currentPage: page};"
+        [name]="carta.nombre" [imgUrl]="carta.imagen" [id]="carta.id" [set]="carta.set" [setName]="carta.setName"
+        [cantidad]="carta.cantidad" [origen]='origen' [mazo_id]='mazoId'></app-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="alert alert-danger" role="alert" *ngIf="error!=''">
+        {{error}}
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3 class="text-center titulo">Registrar Usuario</h3>
+          <form [formGroup]="registerForm" (ngSubmit)="register()" (keydown.enter)="$event.preventDefault()">
+            <div class="mb-3">
+              <input type="text" formControlName="username" class="form-control form-control-lg" placeholder="Username">
+              <span class="text-danger"
+                *ngIf="registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched">
+                El Username es <strong>Obligatorio</strong>
+              </span>
+            </div>
+
+            <div class="mb-3">
+              <input type="text" formControlName="nombre" class="form-control form-control-lg" placeholder="Nombre">
+              <span class="text-danger"
+                *ngIf="registerForm.get('nombre')?.hasError('required') && registerForm.get('nombre')?.touched">
+                El nombre es <strong>Obligatorio</strong>
+              </span>
+            </div>
+
+            <div class="mb-3">
+              <input type="text" formControlName="apellido" class="form-control form-control-lg" placeholder="Apellidos">
+            </div>
+
+            <div class="mb-3">
+              <input type="text" formControlName="email" class="form-control form-control-lg" placeholder="Correo">
+              <span class="text-danger"
+                *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+                El correo es <strong>Obligatorio</strong>
+              </span>
+              <span class="text-danger"
+                *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
+                El correo <strong>Invalido</strong>
+              </span>
+            </div>
+
+            <div class="mb-3">
+              <input type="password" formControlName="password" class="form-control form-control-lg"
+                placeholder="Contraseña">
+              <span class="text-danger"
+                *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+                La contraseña es <strong>Obligatoria</strong>
+              </span>
+              <span class="text-danger"
+                *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">
+                La contraseña debe de tener como minimo <strong>6 carcteres</strong>
+              </span>
+            </div>
+
+            <div class="mb-3">
+              <input type="password" formControlName="repetirPassword" class="form-control form-control-lg"
+                placeholder="Repetir Contraseña">
+              <span class="text-danger" *ngIf="registerForm.hasError('notSame')">
+                Contraseñas <strong>distintas</strong>
+              </span>
+            </div>
+            <button routerLink='' class="btn btn-secondary btn-lg">Volver</button>
+            <button type="submit" [disabled]="registerForm.invalid"
+              class="btn btn-primary btn-lg float-end">Aceptar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
