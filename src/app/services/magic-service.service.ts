@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class MagicServiceService {
-  private URI = 'http://217.71.207.199/api';
+  private URI = 'http://217.71.207.199:3500/api';
 
   constructor(private http: HttpClient) {}
 

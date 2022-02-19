@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class BackServiceService {
 
-  private URI = 'http://217.71.207.199/api';
+  private URI = 'http://217.71.207.199:3500/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
